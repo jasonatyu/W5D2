@@ -1,5 +1,7 @@
 <h1><%= @post.title %> by <%= @post.author.username %></h1>
-<p><%= @sub.content %></p>
+<p><%= @post.content %></p>
+
+<a href="<%= edit_post_url(@post) %>">Edit Post</a>
 
 <h4>Subs</h4>
     <ul>
@@ -7,3 +9,20 @@
             <li><a href="<%= sub_url(sub) %>"><%= sub.title %></a></li>
         <% end %>
     </ul>
+
+<a href="<%= new_post_comment_url(@post) %>">Comment on this post!</a>
+
+<ul>
+    <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
+        <li>
+        <a href="<%= comment_url(comment) %>"><%= comment.content %></a>
+        <% if comment.child_comments %>
+            <ul>
+            <% comment.child_comments.each do |child| %>
+                <li><a href="<% comment_url(child) %>"><%= child.content %></a></li>
+            <% end %>
+            </ul>
+        <% end %>
+        </li>
+    <% end %>
+</ul>   
