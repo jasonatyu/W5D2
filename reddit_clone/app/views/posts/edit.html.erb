@@ -1,0 +1,22 @@
+<h1>Edit Post!</h1>
+
+<form action="<%= post_url(@post) %>" method="POST">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="PATCH">
+
+    <label>Title: 
+        <input type="text" name="post[title]" value="<%= @post.title %>">
+    </label>
+
+     <label>URL: 
+        <input type="text" name="post[url]" value="<%= @post.url %>">
+    </label>
+
+    <label>Content:
+    <textarea name="post[content]"><%= @post.content %></textarea>
+     </label>
+
+    <!-- Need checkboxes w hidden input for selecting subs -->
+    
+    <input type="submit" value="Submit">
+</form>
