@@ -16,13 +16,7 @@
     <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
         <li>
         <a href="<%= comment_url(comment) %>"><%= comment.content %></a>
-        <% if comment.child_comments %>
-            <ul>
-            <% comment.child_comments.each do |child| %>
-                <li><a href="<% comment_url(child) %>"><%= child.content %></a></li>
-            <% end %>
-            </ul>
-        <% end %>
+        <%= render 'comment', comment: comment %>
         </li>
     <% end %>
 </ul>   
