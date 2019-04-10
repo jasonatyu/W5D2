@@ -26,4 +26,15 @@ class Post < ApplicationRecord
     source: :sub
 
   has_many :comments
+
+  def comments_by_parent_id 
+    h = Hash.new { |h,k| h[k] = [] }
+
+    self.comments.each do |c|
+      h[c.parent_comment_id] << c 
+    end
+
+    h
+  end
+
 end

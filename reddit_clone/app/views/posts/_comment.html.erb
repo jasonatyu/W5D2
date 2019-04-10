@@ -1,10 +1,15 @@
-<% if comment.child_comments %>
-    <ul>
-    <% comment.child_comments.each do |child| %>
-        <li><a href="<%= comment_url(child) %>"><%= child.content %></a></li>
-        <% if child.child_comments %>
-            <%= render 'comment', comment: child %>
+<a href="<%= comment_url(comment) %>">
+    <%= comment.content %>, 
+    author: <%= comment.author.username %>, 
+    created at: <%= comment.created_at %>
+</a>
+
+<ul>
+<% @comments_hash.each do |p_id, comments| %>
+    <% if p_id == comment.id %>
+        <% comments.each do |comment| %>
+            <li><%= render 'comment', comment: comment, comments_hash: @comments_hash %></li>
         <% end %>
     <% end %>
-    </ul>
 <% end %>
+</ul>
